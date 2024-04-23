@@ -71,6 +71,7 @@ const updateProject = async (req, res) => {
 
     const updatedProject = await Project.findByIdAndUpdate(id, req.body, {
       new: true,
+      runValidators: true,
     });
     res.status(StatusCodes.OK).json({
       success: true,
