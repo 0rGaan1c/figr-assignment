@@ -18,7 +18,7 @@ const formatMongooseErrorMessage = (err) => {
       errors[key] = err.errors[key].message;
     });
   } else {
-    errors.general = "Somethign went wrong.";
+    errors.general = "Something went wrong.";
   }
 
   return errors;
