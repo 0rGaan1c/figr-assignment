@@ -16,7 +16,7 @@ import { useContext, useState } from "react";
 import { useCookies } from "react-cookie";
 
 export default function CreateAccount() {
-  const [cookie, setCookie] = useCookies(["authToken"]);
+  const [, setCookie] = useCookies(["authToken"]);
   const [currentTab, setCurrentTab] = useState("signup");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -54,6 +54,7 @@ export default function CreateAccount() {
       });
 
       setCookie("authToken", response.data.data.token, { path: "/" });
+      localStorage.setItem("user", JSON.stringify(response.data.data.user));
     } catch (error) {
       toast({
         title: "⛔ Invalid Email or Password.",

@@ -7,7 +7,7 @@ export const BASEURL = "http://localhost:3001/api/";
 const AxiosContext = createContext();
 
 const AxiosProvider = ({ children }) => {
-  const [cookies] = useCookies(["authToken"]);
+  const [cookies, , removeCookie] = useCookies(["authToken"]);
 
   const axiosInstance = useMemo(() => {
     const instance = axios.create({
@@ -38,8 +38,23 @@ const AxiosProvider = ({ children }) => {
     return await axiosInstance.post(url, data, config);
   };
 
+  const getUserProjects = async (url, config = {}) => {
+    return await axiosInstance.get(url, config);
+  };
+
+  const createProject = async (url, data, config = {}) => {
+    return await axiosInstance.post(url, data, config);
+  };
+
+  const logout = () => {
+    removeCookie("authToken", { path: "/" });
+    localStorage.removeItem("user");
+  };
+
   return (
-    <AxiosContext.Provider value={{ login, signup }}>
+    <AxiosContext.Provider
+      value={{ login, signup, getUserProjects, createProject, logout }}
+    >
       {children}
     </AxiosContext.Provider>
   );

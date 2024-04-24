@@ -67,7 +67,10 @@ const login = async (req, res) => {
     );
     return res.status(StatusCodes.OK).json({
       success: true,
-      data: { token, userId: user._id },
+      data: {
+        token,
+        user: { userId: user._id, email: user.email, name: user.name },
+      },
     });
   }
 
