@@ -46,6 +46,10 @@ const AxiosProvider = ({ children }) => {
     return await axiosInstance.post(url, data, config);
   };
 
+  const getProjectById = async (url, config = {}) => {
+    return await axiosInstance.get(url, config);
+  };
+
   const logout = () => {
     removeCookie("authToken", { path: "/" });
     localStorage.removeItem("user");
@@ -53,7 +57,14 @@ const AxiosProvider = ({ children }) => {
 
   return (
     <AxiosContext.Provider
-      value={{ login, signup, getUserProjects, createProject, logout }}
+      value={{
+        login,
+        signup,
+        getUserProjects,
+        createProject,
+        logout,
+        getProjectById,
+      }}
     >
       {children}
     </AxiosContext.Provider>

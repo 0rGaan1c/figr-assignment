@@ -49,8 +49,6 @@ const Home = () => {
         description: "Please try again.",
       });
     }
-
-    console.log(projectName);
   };
 
   useEffect(() => {
@@ -60,6 +58,10 @@ const Home = () => {
         setProjects(projectsData.data.data);
       } catch (err) {
         console.error(err);
+        toast({
+          title: "⛔ Something went wrong while fetching projects.",
+          description: "Please try again.",
+        });
       }
     };
 
@@ -67,7 +69,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="min-h-screenbg-gray-100">
+    <div>
       <nav className="sticky top-0 z-10 bg-white shadow px-24 flex items-center justify-between py-4">
         <span className="font-bold text-3xl">Figr</span>
         <div>
@@ -130,11 +132,11 @@ const Home = () => {
 function ProjectDialog({ projectName, setProjectName, handleCreateProject }) {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <div className="w-full flex justify-end">
+      <div className="w-full flex justify-end">
+        <DialogTrigger asChild>
           <Button>Create Project</Button>
-        </div>
-      </DialogTrigger>
+        </DialogTrigger>
+      </div>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Create a new Project</DialogTitle>
