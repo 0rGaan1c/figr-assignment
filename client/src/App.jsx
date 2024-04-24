@@ -1,14 +1,9 @@
-import { Button } from "./components/ui/button";
+import AuthenticatedApp from "./Authenticated";
+import UnauthenticatedApp from "./Unauthenticated";
 
 function App() {
-  return (
-    <div>
-      <div className="text-3xl font-bold underline text-red-500">
-        Hello, World!
-      </div>
-      <Button>ShadCn</Button>
-    </div>
-  );
+  const user = true;
+  return user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
 }
 
 export default App;
