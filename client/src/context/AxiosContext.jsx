@@ -2,8 +2,8 @@ import { createContext, useMemo } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 
-export const BASEURL = "http://localhost:3001/api/";
-// export const BASEURL = "https://figr-assignment.onrender.com/api/";
+// // export const BASEURL = "http://localhost:3001/api/";
+export const BASEURL = "https://figr-assignment.onrender.com/api/";
 
 const AxiosContext = createContext();
 

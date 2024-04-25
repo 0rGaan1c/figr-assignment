@@ -112,9 +112,12 @@ export default function Project() {
     <div>
       <Nav />
       <div className="w-10/12 mx-auto mt-10">
-        <div className="mb-4 flex justify-end items-center gap-4">
-          <p>{isAutosaving ? "Saving..." : ""}</p>
-          <Button onClick={handleSaveProject}>Save Project</Button>
+        <div className="mb-4 flex justify-between items-center gap-4">
+          <p className="text-2xl font-bold">{project?.name}</p>
+          <div>
+            <p>{isAutosaving ? "Saving..." : ""}</p>
+            <Button onClick={handleSaveProject}>Save Project</Button>
+          </div>
         </div>
         <Tabs defaultValue="color">
           <TabsList className="grid w-full grid-cols-4 bg-slate-500 text-white">
