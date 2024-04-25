@@ -46,6 +46,10 @@ const AxiosProvider = ({ children }) => {
     return await axiosInstance.post(url, data, config);
   };
 
+  const updateProject = async (url, data, config = {}) => {
+    return await axiosInstance.patch(url, data, config);
+  };
+
   const getProjectById = async (url, config = {}) => {
     return await axiosInstance.get(url, config);
   };
@@ -62,6 +66,7 @@ const AxiosProvider = ({ children }) => {
         signup,
         getUserProjects,
         createProject,
+        updateProject,
         logout,
         getProjectById,
       }}

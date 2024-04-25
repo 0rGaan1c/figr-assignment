@@ -114,9 +114,21 @@ const getProjectById = async (req, res) => {
       });
     }
 
+    const radiusEnums =
+      Project.schema.path("radius.baseSize").validators[1].enumValues;
+    const radiusMultiplierEnums =
+      Project.schema.path("radius.multiplier").validators[1].enumValues;
+    const spacingEnums =
+      Project.schema.path("spacing.baseSize").validators[1].enumValues;
+
     res.status(StatusCodes.OK).json({
       success: true,
       data: project,
+      enums: {
+        radiusBaseSize: radiusEnums,
+        radiusMultiplier: radiusMultiplierEnums,
+        spacingBaseSize: spacingEnums,
+      },
     });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
