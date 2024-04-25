@@ -1,10 +1,20 @@
 import { Card, CardContent } from "./ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { generateComponentStyles } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import EditComponentStyle from "./EditComponentStyle";
 import { ScrollArea } from "./ui/scroll-area";
+import { Checkbox } from "./ui/checkbox";
 
 const ComponentTab = ({ colors, selectedSpacingSize, selectedRadiusSize }) => {
   const [selectedComponent, setSelectedComponent] = useState("Button");
@@ -24,7 +34,7 @@ const ComponentTab = ({ colors, selectedSpacingSize, selectedRadiusSize }) => {
   return (
     <>
       <Card className="col-span-1">
-        <CardContent className="p-0 h-[450px]">
+        <CardContent className="p-0 h-[400px]">
           <div
             className={`space-y-1 p-4 cursor-pointer ${
               selectedComponent === "Button"
@@ -83,7 +93,7 @@ const ComponentTab = ({ colors, selectedSpacingSize, selectedRadiusSize }) => {
         </CardContent>
       </Card>
       <Card className="col-span-3 p-4">
-        <ScrollArea className="h-[450px]">
+        <ScrollArea className="h-[400px]">
           <div
             style={{
               display: selectedComponent === "Button" ? "block" : "none",
@@ -101,6 +111,7 @@ const ComponentTab = ({ colors, selectedSpacingSize, selectedRadiusSize }) => {
                     </Button>
                     <div className="col-span-2 px-4">
                       <EditComponentStyle
+                        type="button"
                         componentsStyles={componentsStyles}
                         componentStyle={component}
                         setComponentsStyles={setComponentsStyles}
@@ -125,6 +136,7 @@ const ComponentTab = ({ colors, selectedSpacingSize, selectedRadiusSize }) => {
                     <Input style={component} defaultValue={component.label} />
                     <div className="col-span-2 px-4">
                       <EditComponentStyle
+                        type="input"
                         componentsStyles={componentsStyles}
                         componentStyle={component}
                         setComponentsStyles={setComponentsStyles}
@@ -139,21 +151,103 @@ const ComponentTab = ({ colors, selectedSpacingSize, selectedRadiusSize }) => {
               display: selectedComponent === "Radio" ? "block" : "none",
             }}
           >
-            Radio Selected
+            <div className="flex mt-32 w-full items-center justify-center">
+              <RadioGroup defaultValue="comfortable">
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="default" id="r1" />
+                  <Label htmlFor="r1">Default</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="comfortable" id="r2" />
+                  <Label htmlFor="r2">Comfortable</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="compact" id="r3" />
+                  <Label htmlFor="r3">Compact</Label>
+                </div>
+              </RadioGroup>
+            </div>
           </div>
           <div
             style={{
               display: selectedComponent === "Checkbox" ? "block" : "none",
             }}
           >
-            Checkbox Selected
+            <div className="flex mt-32 w-full items-center justify-center">
+              <div>
+                <div className="flex items-center space-x-2 mb-10">
+                  <Checkbox id="terms" />
+                  <label
+                    htmlFor="terms"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    Accept terms and conditions
+                  </label>
+                </div>
+                <div className="items-top flex space-x-2">
+                  <Checkbox id="terms1" />
+                  <div className="grid gap-1.5 leading-none">
+                    <label
+                      htmlFor="terms1"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      Accept terms and conditions
+                    </label>
+                    <p className="text-sm text-muted-foreground">
+                      You agree to our Terms of Service and Privacy Policy.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div
             style={{
               display: selectedComponent === "Select" ? "block" : "none",
             }}
           >
-            Select Selected
+            {componentsStyles &&
+              componentsStyles.map((component, idx) => {
+                return (
+                  <div
+                    key={idx}
+                    className="mb-8 grid grid-cols-3 gap-4 items-center pl-4"
+                  >
+                    <Select style={component}>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Theme" />
+                      </SelectTrigger>
+                      <SelectContent style={component}>
+                        <SelectItem
+                          value="light"
+                          style={{ color: component.color }}
+                        >
+                          Light
+                        </SelectItem>
+                        <SelectItem
+                          value="dark"
+                          style={{ color: component.color }}
+                        >
+                          Dark
+                        </SelectItem>
+                        <SelectItem
+                          value="system"
+                          style={{ color: component.color }}
+                        >
+                          System
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <div className="col-span-2 px-4">
+                      <EditComponentStyle
+                        componentsStyles={componentsStyles}
+                        componentStyle={component}
+                        setComponentsStyles={setComponentsStyles}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
           </div>
         </ScrollArea>
       </Card>

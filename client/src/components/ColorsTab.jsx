@@ -80,8 +80,8 @@ const ColorsTab = ({ colors, setColors, selectedColor, setSelectedColor }) => {
           <CardTitle>Colors</CardTitle>
           <Button onClick={handleAddColor}>+</Button>
         </CardHeader>
-        <ScrollArea className="h-[450px]">
-          <CardContent className="space-y-1 h-[450px]">
+        <ScrollArea className="h-[400px]">
+          <CardContent className="space-y-1 h-[400px]">
             <Accordion type="single" collapsible>
               {colors &&
                 colors.map(({ label, value, _id }, idx) => {

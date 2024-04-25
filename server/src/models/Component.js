@@ -5,11 +5,11 @@ const componentSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ["button", "input-text", "input-radio", "input-checkbox", "select"],
+    enum: ["button", "input-text", "select"],
   },
   customStyles: {
     backgroundColor: { type: String },
-    textColor: { type: String },
+    color: { type: String },
     borderColor: { type: String },
     borderRadius: { type: Number },
     padding: {

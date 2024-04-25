@@ -11,19 +11,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 import { AxiosContext } from "@/context/AxiosContext";
-import { getUserFromLocalStorage } from "@/lib/utils";
-
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
+import Nav from "@/components/Nav";
 
 const Home = () => {
-  const { getUserProjects, createProject, logout } = useContext(AxiosContext);
+  const { getUserProjects, createProject } = useContext(AxiosContext);
   const [projects, setProjects] = useState(null);
   const [projectName, setProjectName] = useState("");
   const navigate = useNavigate();
-
-  const user = getUserFromLocalStorage();
 
   const handleCreateProject = async () => {
     if (!projectName) {
@@ -70,23 +67,7 @@ const Home = () => {
 
   return (
     <div>
-      <nav className="sticky top-0 z-10 bg-white shadow px-24 flex items-center justify-between py-4">
-        <span className="font-bold text-3xl">Figr</span>
-        <div>
-          <div>
-            {user?.name}
-            <Button
-              variant="outline"
-              className="ml-2"
-              onClick={() => {
-                logout();
-              }}
-            >
-              Logout
-            </Button>
-          </div>
-        </div>
-      </nav>
+      <Nav />
 
       <main className="container mx-auto py-8">
         <div className="mb-4">

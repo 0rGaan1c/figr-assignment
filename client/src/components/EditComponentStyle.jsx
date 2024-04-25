@@ -1,4 +1,3 @@
-import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
 const EditComponentStyle = ({
@@ -117,7 +116,6 @@ const EditComponentStyle = ({
               }}
             />
           </div>
-          <Button>Save</Button>
         </div>
       )}
     </>

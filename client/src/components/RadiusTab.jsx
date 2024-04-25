@@ -27,7 +27,7 @@ const RadiusTab = ({ enums, selectedRadiusSize, setSelectedRadiusSize }) => {
         <CardHeader>
           <CardTitle>Radius</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-1 h-[450px]">
+        <CardContent className="space-y-1 h-[400px]">
           <div className="mb-6">
             <Label htmlFor="name">Select base size</Label>
             <Select

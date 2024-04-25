@@ -23,7 +23,7 @@ const SpacingTab = ({ enums, selectedSpacingSize, setSelectedSpacingSize }) => {
         <CardHeader>
           <CardTitle>Spacing</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-1 h-[450px]">
+        <CardContent className="space-y-1 h-[400px]">
           <Label htmlFor="name">Select base size</Label>
           <Select
             onValueChange={(value) => {
