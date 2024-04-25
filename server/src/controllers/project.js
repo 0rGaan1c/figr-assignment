@@ -123,11 +123,13 @@ const getProjectById = async (req, res) => {
 
     res.status(StatusCodes.OK).json({
       success: true,
-      data: project,
-      enums: {
-        radiusBaseSize: radiusEnums,
-        radiusMultiplier: radiusMultiplierEnums,
-        spacingBaseSize: spacingEnums,
+      data: {
+        project,
+        enums: {
+          radiusBaseSize: radiusEnums,
+          radiusMultiplier: radiusMultiplierEnums,
+          spacingBaseSize: spacingEnums,
+        },
       },
     });
   } catch (error) {

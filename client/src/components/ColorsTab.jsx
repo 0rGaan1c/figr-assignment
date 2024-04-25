@@ -12,20 +12,16 @@ import { AxiosContext } from "@/context/AxiosContext";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { generateHexColorCode } from "@/lib/utils";
+import { ScrollArea } from "./ui/scroll-area";
 
-const ColorsTab = ({
-  project,
-  setProject,
-  selectedColor,
-  setSelectedColor,
-}) => {
+const ColorsTab = ({ colors, setColors, selectedColor, setSelectedColor }) => {
   const { id } = useParams();
   const { updateProject } = useContext(AxiosContext);
 
   const handleColorValueChange = ({ id, hexValue }) => {
-    setProject((prevProject) => {
+    setColors((prevState) => {
       let updatedColor = [];
-      prevProject.colors.forEach(({ _id, value, label }) => {
+      prevState.forEach(({ _id, value, label }) => {
         let color = {};
         if (_id === id) {
           color = { _id, label, value: hexValue };
@@ -34,15 +30,15 @@ const ColorsTab = ({
         }
         updatedColor.push(color);
       });
-      return { ...prevProject, colors: updatedColor };
+      return [...updatedColor];
     });
     setSelectedColor({ ...selectedColor, value: hexValue });
   };
 
   const handleColorVariableNameChange = ({ id, varibleName }) => {
-    setProject((prevProject) => {
+    setColors((prevState) => {
       let updatedColor = [];
-      prevProject.colors.forEach(({ _id, value, label }) => {
+      prevState.forEach(({ _id, value, label }) => {
         let color = {};
         if (_id === id) {
           color = { _id, label: varibleName, value };
@@ -51,28 +47,27 @@ const ColorsTab = ({
         }
         updatedColor.push(color);
       });
-      return { ...prevProject, colors: updatedColor };
+      return [...updatedColor];
     });
     setSelectedColor({ ...selectedColor, label: varibleName });
   };
 
   const handleAddColor = async () => {
-    setProject((prevProject) => {
-      let colors = prevProject.colors;
+    setColors((prevState) => {
+      let colors = prevState;
       colors.push({
         label: `Color ${colors.length + 1}`,
         value: generateHexColorCode(),
       });
-      return { ...prevProject, colors };
+      return colors;
     });
-    setSelectedColor(project.colors[project.colors.length - 1]);
+    setSelectedColor(colors[colors.length - 1]);
 
     try {
       const response = await updateProject(`projects/${id}`, {
-        colors: project.colors,
+        colors: colors,
       });
-      setProject(response.data.data);
-      console.log(response);
+      setColors(response.data.data.colors);
     } catch (err) {
       console.error(err);
     }
@@ -85,56 +80,56 @@ const ColorsTab = ({
           <CardTitle>Colors</CardTitle>
           <Button onClick={handleAddColor}>+</Button>
         </CardHeader>
-        <CardContent className="space-y-1 h-[450px]">
-          <Accordion type="single" collapsible>
-            {project &&
-              project?.colors.map(({ label, value, _id }) => {
-                return (
-                  <div key={_id}>
-                    <AccordionItem value={_id}>
-                      <AccordionTrigger
-                        onClick={() => {
-                          setSelectedColor({ label, value, _id });
-                        }}
-                      >
-                        <span style={{ color: value }}>{label}</span>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <div className="mb-2">
-                          <Label htmlFor="name">Variable Name</Label>
-                          <Input
-                            className="focus-visible:ring-transparent"
-                            type="text"
-                            value={label}
-                            onChange={(e) => {
-                              handleColorVariableNameChange({
-                                id: _id,
-                                varibleName: e.target.value,
-                              });
-                            }}
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <Label htmlFor="name">Hex Code</Label>
-                          <Input
-                            className="focus-visible:ring-transparent"
-                            type="text"
-                            value={value}
-                            onChange={(e) => {
-                              handleColorValueChange({
-                                id: _id,
-                                hexValue: e.target.value,
-                              });
-                            }}
-                          />
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </div>
-                );
-              })}
-          </Accordion>
-        </CardContent>
+        <ScrollArea className="h-[450px]">
+          <CardContent className="space-y-1 h-[450px]">
+            <Accordion type="single" collapsible>
+              {colors &&
+                colors.map(({ label, value, _id }, idx) => {
+                  return (
+                    <div key={idx}>
+                      <AccordionItem value={_id}>
+                        <AccordionTrigger
+                          onClick={() => {
+                            setSelectedColor({ label, value, _id });
+                          }}
+                        >
+                          <span style={{ color: value }}>{label}</span>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="mb-2">
+                            <Label htmlFor="name">Variable Name</Label>
+                            <Input
+                              type="text"
+                              value={label}
+                              onChange={(e) => {
+                                handleColorVariableNameChange({
+                                  id: _id,
+                                  varibleName: e.target.value,
+                                });
+                              }}
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <Label htmlFor="name">Hex Code</Label>
+                            <Input
+                              type="text"
+                              value={value}
+                              onChange={(e) => {
+                                handleColorValueChange({
+                                  id: _id,
+                                  hexValue: e.target.value,
+                                });
+                              }}
+                            />
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </div>
+                  );
+                })}
+            </Accordion>
+          </CardContent>
+        </ScrollArea>
       </Card>
       <Card className="col-span-3">
         <div

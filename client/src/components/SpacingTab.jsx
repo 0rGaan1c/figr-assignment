@@ -9,29 +9,18 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import VariableTable from "./VariableTable";
 import { generateSpacingVariables } from "@/lib/utils";
-import { useState } from "react";
 
-const SpacingTab = ({
-  project,
-  setProject,
-  enums,
-  selectedSpacingSize,
-  setSelectedSpacingSize,
-}) => {
-  const [sizeVariables, setSizeVariables] = useState(
-    generateSpacingVariables(selectedSpacingSize)
-  );
-  console.log(sizeVariables);
+const SpacingTab = ({ enums, selectedSpacingSize, setSelectedSpacingSize }) => {
+  const sizeVariables = generateSpacingVariables(selectedSpacingSize);
 
   const handleBaseSizeChange = (value) => {
     setSelectedSpacingSize(value);
-    setSizeVariables(generateSpacingVariables(value));
   };
 
   return (
     <>
       <Card className="col-span-1">
-        <CardHeader className="flex flex-row items-center justify-between">
+        <CardHeader>
           <CardTitle>Spacing</CardTitle>
         </CardHeader>
         <CardContent className="space-y-1 h-[450px]">

@@ -9,45 +9,22 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import VariableTable from "./VariableTable";
 import { generateRadiusVariables } from "@/lib/utils";
-import { useEffect, useState } from "react";
 
-const RadiusTab = ({
-  project,
-  setProject,
-  enums,
-  selectedRadiusSize,
-  setSelectedRadiusSize,
-}) => {
-  const [sizeVariables, setSizeVariables] = useState(
-    generateRadiusVariables(selectedRadiusSize)
-  );
+const RadiusTab = ({ enums, selectedRadiusSize, setSelectedRadiusSize }) => {
+  const sizeVariables = generateRadiusVariables(selectedRadiusSize);
 
   const handleRaidusBaseSizeChange = (value) => {
-    console.log("here");
     setSelectedRadiusSize({ ...selectedRadiusSize, baseSize: value });
-    setSizeVariables(
-      generateRadiusVariables({
-        ...selectedRadiusSize,
-        baseSize: value,
-      })
-    );
   };
 
   const handleRaidusMultiplierSizeChange = (value) => {
-    console.log("down");
     setSelectedRadiusSize({ ...selectedRadiusSize, multiplier: value });
-    setSizeVariables(
-      generateRadiusVariables({
-        ...selectedRadiusSize,
-        multiplier: value,
-      })
-    );
   };
 
   return (
     <>
       <Card className="col-span-1">
-        <CardHeader className="flex flex-row items-center justify-between">
+        <CardHeader>
           <CardTitle>Radius</CardTitle>
         </CardHeader>
         <CardContent className="space-y-1 h-[450px]">

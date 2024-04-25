@@ -69,3 +69,18 @@ export function generateRadiusVariables({ baseSize, multiplier }) {
 
   return sizeVariables;
 }
+
+export function generateComponentStyles(colors, spacing, radius) {
+  const calculatedRadius = radius.baseSize * radius.multiplier;
+
+  const buttonStyles = colors.map((color) => ({
+    backgroundColor: color.value,
+    color: "#ffffff",
+    margin: `${spacing}px`,
+    padding: `${spacing}px`,
+    borderRadius: `${calculatedRadius}px`,
+    label: color.label + " - s",
+  }));
+
+  return buttonStyles;
+}
