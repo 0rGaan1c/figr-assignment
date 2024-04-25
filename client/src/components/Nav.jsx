@@ -24,7 +24,9 @@ const Nav = () => {
       </span>
       <div>
         <div>
-          {user?.name}
+          <Link to="/editprofile" className="hover:underline">
+            {user?.name}
+          </Link>
           <Dialog>
             <DialogTrigger className="ml-2">
               <Button variant="outline">Logout</Button>

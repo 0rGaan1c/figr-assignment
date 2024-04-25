@@ -3,6 +3,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 
 export const BASEURL = "http://localhost:3001/api/";
+// export const BASEURL = "https://figr-assignment.onrender.com/api/";
 
 const AxiosContext = createContext();
 
@@ -54,6 +55,10 @@ const AxiosProvider = ({ children }) => {
     return await axiosInstance.get(url, config);
   };
 
+  const updateUserDetails = async (url, data, config = {}) => {
+    return await axiosInstance.patch(url, data, config);
+  };
+
   const logout = () => {
     removeCookie("authToken", { path: "/" });
     localStorage.removeItem("user");
@@ -69,6 +74,7 @@ const AxiosProvider = ({ children }) => {
         updateProject,
         logout,
         getProjectById,
+        updateUserDetails,
       }}
     >
       {children}

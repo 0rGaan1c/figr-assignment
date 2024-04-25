@@ -93,11 +93,13 @@ export default function CreateAccount() {
           <Card>
             <CardHeader>
               <CardTitle>Signup</CardTitle>
-              <CardDescription>Create your account.</CardDescription>
+              <CardDescription>
+                Create your account to start creating projects.
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
               <div className="space-y-1">
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">Name *</Label>
                 <Input
                   id="name"
                   onChange={(e) => {
@@ -106,7 +108,7 @@ export default function CreateAccount() {
                 />
               </div>
               <div className="space-y-1">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">Email *</Label>
                 <Input
                   id="email"
                   onChange={(e) => {
@@ -115,7 +117,12 @@ export default function CreateAccount() {
                 />
               </div>
               <div className="space-y-1">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">
+                  Password,{" "}
+                  <span className="text-gray-500 font-normal">
+                    atleast 6 digits long *
+                  </span>
+                </Label>
                 <Input
                   id="password"
                   type="password"
@@ -138,7 +145,7 @@ export default function CreateAccount() {
             </CardHeader>
             <CardContent className="space-y-2">
               <div className="space-y-1">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">Email *</Label>
                 <Input
                   id="email"
                   onChange={(e) => {
@@ -147,7 +154,7 @@ export default function CreateAccount() {
                 />
               </div>
               <div className="space-y-1">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Password *</Label>
                 <Input
                   id="password"
                   type="password"

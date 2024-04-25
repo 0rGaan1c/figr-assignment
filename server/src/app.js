@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const authRouter = require("./routes/auth");
 const projectRouter = require("./routes/project");
 const componentRouter = require("./routes/component");
+const userRouter = require("./routes/user");
 
 const app = express();
 app.use(cors());
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 app.use("/api", authRouter);
 app.use("/api/projects", projectRouter);
 app.use("/api/components", componentRouter);
+app.use("/api/user", userRouter);
 
 const port = process.env.PORT || 3001;
 

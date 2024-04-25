@@ -6,7 +6,12 @@ export function cn(...inputs) {
 }
 
 export function getUserFromLocalStorage() {
-  return JSON.parse(localStorage.getItem("user"));
+  const user = localStorage.getItem("user");
+  if (user === "undefined") {
+    return {};
+  }
+
+  return JSON.parse(user);
 }
 
 export function generateHexColorCode() {
