@@ -71,9 +71,9 @@ const EditProfile = () => {
             />
           </div>
           <div className="space-y-1 my-2">
-            <Label htmlFor="password">Old Password *</Label>
+            <Label htmlFor="oldpassword">Old Password *</Label>
             <Input
-              id="password"
+              id="oldpassword"
               type="password"
               onChange={(e) => {
                 setOldPassword(e.target.value);
@@ -81,14 +81,14 @@ const EditProfile = () => {
             />
           </div>
           <div className="space-y-1 my-2">
-            <Label htmlFor="password">
-              Password,{" "}
+            <Label htmlFor="newpassword">
+              New Password,{" "}
               <span className="text-gray-500 font-normal">
                 atleast 6 digits long *
               </span>
             </Label>
             <Input
-              id="password"
+              id="newpassword"
               type="password"
               onChange={(e) => {
                 setNewPassword(e.target.value);

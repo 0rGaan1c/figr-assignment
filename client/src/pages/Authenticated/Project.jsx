@@ -34,7 +34,7 @@ export default function Project() {
         const {
           data: { data },
         } = await updateProject(`projects/${id}`, projectDataToUpdate);
-        setProject(data.project);
+        setProject(data);
         setIsAutoSaving(false);
       } catch (err) {
         setIsAutoSaving(false);
@@ -96,12 +96,11 @@ export default function Project() {
       radius: selectedRadiusSize,
       spacing: { baseSize: selectedSpacingSize },
     };
-    console.log(projectDataToUpdate);
 
     const {
       data: { data },
     } = await updateProject(`projects/${id}`, projectDataToUpdate);
-    setProject(data.project);
+    setProject(data);
     setIsAutoSaving(false);
     toast({
       title: "✅ Project data saved.",
@@ -112,9 +111,9 @@ export default function Project() {
     <div>
       <Nav />
       <div className="w-10/12 mx-auto mt-10">
-        <div className="mb-4 flex justify-between items-center gap-4">
+        <div className="mb-4 flex justify-between items-center">
           <p className="text-2xl font-bold">{project?.name}</p>
-          <div>
+          <div className="flex items-center gap-4">
             <p>{isAutosaving ? "Saving..." : ""}</p>
             <Button onClick={handleSaveProject}>Save Project</Button>
           </div>
